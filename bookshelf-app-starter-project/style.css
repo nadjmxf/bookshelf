@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: DM Sans, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: inline;
+}
+
+h1 {
+    font-size: 70px;
+    padding: 60px;
+    background-color: #488098;
+    text-align: center;
+    color: #e0d8cb;
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-flow: column;
+    gap: 2.5rem;
+}
+
+section {
+    flex: 5;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem 2rem;
+    align-items: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 0px;
+}
+
+.wrapper section {
+    width: 1024px;
+    border-radius: 8px;
+    margin: 16px 16px 16px 0;
+    background: #f7fdff;
+    padding: 16px;
+    flex-grow: 1;
+    height: fit-content;
+}
+
+h2{
+    color: #488098;
+    text-align: center;
+}
+
+.item {
+    border-radius: 16px;
+    margin-top: 16px;
+    padding: 12px 24px 12px 24px;
+    background: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    min-width: 500px;
+}
+
+.item > .inner h2 {
+    margin-bottom: unset;
+}
+
+.item > .inner p {
+    margin-top: 5px;
+}
+
+form {
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    height: auto;
+    border-radius: 16px;
+    max-width: 700px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 4px;
+    font-size: 18px;
+    font-weight: light;
+}
+
+.shadow {
+    box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
+}
+
+input[type=text], input[type=number] {
+    font-family: DM Sans, Helvetica, sans-serif;
+    background: #cfe2e9;
+    border: 2px solid #488098;
+    border-radius: 8px;
+    padding: 16px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+    font-size: 18px;
+    width: 100%;
+}
+
+.btn-submit {
+    width: fit-content;
+    font-family: DM Sans, Helvetica, sans-serif;
+    border-radius: 16px;
+    padding: 12px 24px;
+    border: 2px solid #488098;
+    color: black;
+    font-size: 16px;
+    margin-top: auto;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #488098;
+    color: white;
+}
+
+input[type=text], input[type=number], .btn-submit:focus {
+    outline: none;
+}
+
+.finishedButton, .notFinishedButton, .editButton, .trashButton {
+    font-family: DM Sans, Helvetica, sans-serif;
+    background: #cfe2e9;
+    border: 2px solid #488098;
+    border-radius: 6px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-right: 8px;
+    font-size: 13px;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    min-width: 200px;
+}
+
+.inner {
+    flex: 1;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media screen and (max-width: 1200px) {
+    main {
+        flex-flow: column nowrap;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 40px;
+        padding: 30px;
+    }
+
+    main {
+        padding: 10px;
+        gap: 1.5rem;
+    }
+
+    .wrapper section {
+        width: 100%;
+        margin: 12px 12px 12px 12px;
+        padding: 12px;
+    }
+
+    .item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px;
+        min-width: 250px;
+    }
+
+    .buttonContainer {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+
+    form {
+        padding: 12px;
+    }
+
+    input[type=text], input[type=number] {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .btn-submit {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .checkbox {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .inner {
+        width: 100%;
+    }
+
+    .finishedButton, .notFinishedButton, .editButton, .trashButton {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
