@@ -1,4 +1,3 @@
-// Do your work here...
 let books = [];
 const RENDER_EVENT = 'render-book';
 const SAVED_EVENT = 'saved-book';
@@ -48,22 +47,29 @@ document.addEventListener('DOMContentLoaded', function () {
         return { id, title, author, year, isCompleted };
     }
 
-    document.addEventListener(RENDER_EVENT, function () {
-        const incompletedBook = document.getElementById('incompleteBookList');
-        incompletedBook.innerHTML = '';
+    function renderBooks(filteredBooks = books) {
+        const incompleteBookList = document.getElementById('incompleteBookList');
+        const completeBookList = document.getElementById('completeBookList');
 
-        const completedBook = document.getElementById('completeBookList');
-        completedBook.innerHTML = '';
+        incompleteBookList.innerHTML = '';
+        completeBookList.innerHTML = '';
 
-        for (const book of books) {
+        filteredBooks.forEach(book => {
             const bookElement = makeBookElement(book);
-            if (!book.isCompleted) {
-                incompletedBook.append(bookElement);
+            if (book.isCompleted) {
+                completeBookList.append(bookElement);
             } else {
-                completedBook.append(bookElement);
+                incompleteBookList.append(bookElement);
             }
+        });
+
+        const showAllBooksBtn = document.getElementById('showAllBooks');
+        if (filteredBooks.length !== books.length) {
+            showAllBooksBtn.style.display = 'block';
+        } else {
+            showAllBooksBtn.style.display = 'none';
         }
-    });
+    }
 
     function makeBookElement(book) {
         const textBookTitle = document.createElement('h3');
@@ -181,24 +187,21 @@ document.addEventListener('DOMContentLoaded', function () {
         saveData();
     }
 
-    const searchSubmit = document.getElementById('searchSubmit');
-    function findBooksByTitle(title) {
-        return books.find(book => book.title.toLowerCase() === title.toLowerCase());
-    }
-
-    searchSubmit.addEventListener('click', function () {
-        findBooksByTitle(title);
-        const searchInput = document.getElementById("searchBookTitle");
-        const title = searchInput.value.trim();
-
-        const foundBook = findBooksByTitle(title);
-
-        if (foundBook) {
-            alert(`Book found: ${foundBook.title}`);
-        } else {
-            alert("Book not found!");
-        }
+    const searchForm = document.getElementById('searchBook');
+    searchForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const searchTitle = document.getElementById('searchBookTitle').value.toLowerCase();
+        const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchTitle));
+        renderBooks(filteredBooks);
     });
+
+    const showAllBooksBtn = document.getElementById('showAllBooks');
+    showAllBooksBtn.addEventListener('click', function () {
+        renderBooks(books); // Reset to show all books
+        document.getElementById('searchBookTitle').value = ''; // Clear search input
+    });
+    
+    renderBooks();
 
     function saveData() {
         if (isStorageExist()) {
