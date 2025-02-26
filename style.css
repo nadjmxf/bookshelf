@@ -54,7 +54,7 @@ section {
     height: fit-content;
 }
 
-h2{
+h2 {
     color: #488098;
     text-align: center;
 }
@@ -117,7 +117,14 @@ input[type=text], input[type=number] {
     width: 100%;
 }
 
-.btn-submit {
+.button-container {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: safe;
+}
+
+.btn-submit, #showAllBooks {
     width: fit-content;
     font-family: DM Sans, Helvetica, sans-serif;
     border-radius: 16px;
@@ -126,16 +133,16 @@ input[type=text], input[type=number] {
     color: black;
     font-size: 16px;
     margin-top: auto;
-    align-self: flex-end;
+    display: inline-block;
     cursor: pointer;
 }
 
-.btn-submit:hover {
+.btn-submit:hover, #showAllBooks:hover {
     background: #488098;
     color: white;
 }
 
-input[type=text], input[type=number], .btn-submit:focus {
+input[type=text], input[type=number], .btn-submit:focus, #showAllBooks:focus {
     outline: none;
 }
 
