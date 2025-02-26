@@ -1,4 +1,9 @@
 // Do your work here...
+let books = [];
+const RENDER_EVENT = 'render-book';
+const SAVED_EVENT = 'saved-book';
+const STORAGE_KEY = 'BOOK_APPS';
+
 document.addEventListener('DOMContentLoaded', function () {
     const submitForm = document.getElementById('bookForm');
     const submitButton = document.getElementById('bookFormSubmit');
@@ -14,13 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
             submitButton.innerHTML = 'Masukkan Buku ke rak <span>Selesai dibaca</span>';
         } else {
             submitButton.innerHTML = 'Masukkan Buku ke rak <span>Belum selesai dibaca</span>';
-        }
+        }   
     });
 
-    const books = [];
-    const RENDER_EVENT = 'render-book';
-    const SAVED_EVENT = 'saved-book';
-    const STORAGE_KEY = 'BOOK_APPS';
+    if (isStorageExist()) {
+        loadDataFromStorage();
+    }
 
     function addBook() {
         const bookTitle = document.getElementById('bookFormTitle').value;
@@ -177,13 +181,24 @@ document.addEventListener('DOMContentLoaded', function () {
         saveData();
     }
 
-    function findBook(bookId) {
-        return books.find(book => book.id === bookId);
+    const searchSubmit = document.getElementById('searchSubmit');
+    function findBooksByTitle(title) {
+        return books.find(book => book.title.toLowerCase() === title.toLowerCase());
     }
 
-    function findBookIndex(bookId) {
-        return books.findIndex(book => book.id === bookId);
-    }
+    searchSubmit.addEventListener('click', function () {
+        findBooksByTitle(title);
+        const searchInput = document.getElementById("searchBookTitle");
+        const title = searchInput.value.trim();
+
+        const foundBook = findBooksByTitle(title);
+
+        if (foundBook) {
+            alert(`Book found: ${foundBook.title}`);
+        } else {
+            alert("Book not found!");
+        }
+    });
 
     function saveData() {
         if (isStorageExist()) {
@@ -200,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function loadDataFromStorage() {
         const serializedData = localStorage.getItem(STORAGE_KEY);
         if (serializedData) {
-            books.push(...JSON.parse(serializedData));
+            books = JSON.parse(serializedData);
         }
         document.dispatchEvent(new Event(RENDER_EVENT));
     }
